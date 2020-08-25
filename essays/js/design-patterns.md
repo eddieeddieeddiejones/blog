@@ -75,24 +75,26 @@
 > 构造函数的实例只有一个，一般是通过闭包存储内部实例，通过接口访问内部实例。
 
 ```javascript
-	var singleton = ()=>{
-		var instance;
-		var createInstance = ()=>{
-			this.a = 1;
-			this.b = 2;
-		}
-		return {
-			getInstance:()=>{
-				if(!instance){
-					instance = createInstance();
-				}
-				return instance;
-			}
-		}
-	}
-	var test = singleton();
-	test.getInstance() == test.getInstance() //true
-
+  var singleton = () => {
+    var instance;
+    var createInstance = () => {
+      const obj = {}
+      obj.a = 1
+      obj.b = 2
+      return obj
+    } // 单例模式方法入口
+    return {
+      getInstance: () => {
+        if (!instance) {
+          instance = createInstance()
+        }
+        return instance
+      }
+    }
+  }
+  var test = singleton()
+  console.log(test.getInstance() === test.getInstance()) // true
+  console.log(test.getInstance()); // {a: 1, b: 2}
 ```
 
 4. decorator混合模式
